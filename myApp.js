@@ -3,41 +3,23 @@ const app = express();
 
 const helmet = require('helmet');
 
-// Hide Potentially Dangerous Information
-app.use(helmet.hidePoweredBy());
-
-// Mitigate the Risk of Clickjacking
-app.use(helmet.frameguard({ action: 'deny' }));
-
-// Mitigate the Risk of Cross Site Scripting (XSS) Attacks
-app.use(helmet.xssFilter());
-
-// Avoid Inferring the Response MIME Type
-app.use(helmet.noSniff());
-
-// Prevent IE from Opening Untrusted HTML
-app.use(helmet.ieNoOpen());
-
-// set hsts
 const ninetyDaysInSeconds = 90 * 24 * 60 * 60;
-app.use(helmet.hsts({
-  maxAge: ninetyDaysInSeconds,
-  force: true,
-}));
-
-// Disable DNS Prefetching
-app.use(helmet.dnsPrefetchControl());
-
-// Disable Client-Side Caching
-app.use(helmet.noCache());
-
-// Set a Content Security Policy
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "trusted-cdn.com"], 
+app.use(helmet({
+  frameguard: {         // configure
+    action: 'deny'
+  },
+  contentSecurityPolicy: {    // enable and configure
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "trusted-cdn.com"],
+    }
+  },
+  dnsPrefetchControl: false     // disable,
+  strictTransportSecurity:{ 
+    maxAge: ninetyDaysInSeconds,
+    force: true,
   }
-}));
+}))
 
 
 

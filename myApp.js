@@ -14,7 +14,7 @@ app.use(helmet({
       styleSrc: ["'self'", "trusted-cdn.com"],
     }
   },
-  dnsPrefetchControl: false     // disable,
+  dnsPrefetchControl: false,     // disable,
   strictTransportSecurity:{ 
     maxAge: ninetyDaysInSeconds,
     force: true,

@@ -15,49 +15,11 @@ app.use(helmet({
     }
   },
   dnsPrefetchControl: false,     // disable,
-  strictTransportSecurity:{ 
+  strictTransportSecurity: {
     maxAge: ninetyDaysInSeconds,
     force: true,
   }
 }))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = app;
 const api = require('./server.js');
